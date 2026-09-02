@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
+<plist version="1.0">
+<dict>
+	<!-- The launchd job label. It MUST equal this file's base name: SMAppService.agent(plistName:)
+	     looks the plist up by file name, and launchd rejects a mismatch. Save this file as
+	     {{SERVICE_NAME}}.plist. -->
+	<key>Label</key>
+	<string>{{SERVICE_NAME}}</string>
+	<!-- The executable to run, as a path relative to the registering bundle (the helper .app). -->
+	<key>BundleProgram</key>
+	<string>Contents/MacOS/{{HELPER_NAME}}</string>
+	<!-- The Mach service the helper vends. launchd owns the name and hands the receive right to the
+	     process it launches, which is why a plain app can't advertise it itself. -->
+	<key>MachServices</key>
+	<dict>
+		<key>{{SERVICE_NAME}}</key>
+		<true/>
+	</dict>
+	<!-- Start the helper at login so it's ready to serve. No KeepAlive, so the menu's Quit item
+	     actually quits until the next login — a background process the user can't stop is a bug. -->
+	<key>RunAtLoad</key>
+	<true/>
+	<!-- Attributes this agent to the helper (and the app) in System Settings > Login Items. -->
+	<key>AssociatedBundleIdentifiers</key>
+	<array>
+		<string>{{HELPER_BUNDLE_ID}}</string>
+		<string>{{APP_BUNDLE_ID}}</string>
+	</array>
+</dict>
+</plist>

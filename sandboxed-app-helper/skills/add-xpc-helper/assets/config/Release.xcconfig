@@ -1,0 +1,9 @@
+// Release.xcconfig
+// Attached to the *project's* Release build configuration.
+// HELPER_DISTRIBUTION_HOST inherits the production value from Base.xcconfig.
+
+#include "Base.xcconfig"
+
+DEBUG_INFORMATION_FORMAT = dwarf-with-dsym
+ENABLE_NS_ASSERTIONS = NO
+SWIFT_COMPILATION_MODE = wholemodule

@@ -1,0 +1,25 @@
+// {{APP_NAME}}.xcconfig
+// Settings for the main app target (sandboxed, App Store). Attach to both its Debug and Release
+// configurations unless the target genuinely varies by configuration.
+
+#include "Version.xcconfig"
+
+ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon
+CODE_SIGN_ENTITLEMENTS = {{APP_NAME}}/{{APP_NAME}}.entitlements
+CODE_SIGN_IDENTITY = Apple Development
+CODE_SIGN_STYLE = Automatic
+DEVELOPMENT_TEAM = {{TEAM_ID}}
+ENABLE_PREVIEWS = YES
+GENERATE_INFOPLIST_FILE = YES
+// An explicit Info.plist, not just INFOPLIST_KEY_* settings, because the app needs a custom key
+// (HelperDistributionHost) whose value is a build-setting reference.
+INFOPLIST_FILE = {{APP_NAME}}/Info.plist
+INFOPLIST_KEY_CFBundleDisplayName = {{APP_NAME}}
+INFOPLIST_KEY_ITSAppUsesNonExemptEncryption = NO
+LD_RUNPATH_SEARCH_PATHS = @executable_path/../Frameworks
+MACOSX_DEPLOYMENT_TARGET = {{DEPLOYMENT_TARGET}}
+PRODUCT_BUNDLE_IDENTIFIER = {{APP_BUNDLE_ID}}
+PRODUCT_NAME = {{APP_NAME}}
+SDKROOT = macosx
+SUPPORTED_PLATFORMS = macosx
+SWIFT_VERSION = 6.0

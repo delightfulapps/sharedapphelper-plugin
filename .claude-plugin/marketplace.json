@@ -1,0 +1,18 @@
+{
+  "name": "shared-app-helper",
+  "owner": {
+    "name": "Delightful Apps",
+    "url": "https://github.com/delightfulapps/sharedapphelper-plugin"
+  },
+  "description": "Reusable macOS app infrastructure extracted from shipping apps.",
+  "plugins": [
+    {
+      "name": "sandboxed-app-helper",
+      "source": "./sandboxed-app-helper",
+      "description": "Add an unsandboxed, notarized XPC helper to a sandboxed macOS app: helper target, shared Swift package, launch agent, xcconfig, download/install flow, and the Developer ID release pipeline.",
+      "category": "development",
+      "keywords": ["macos", "xpc", "app-sandbox", "launch-agent", "notarization", "xcconfig"],
+      "license": "MIT"
+    }
+  ]
+}

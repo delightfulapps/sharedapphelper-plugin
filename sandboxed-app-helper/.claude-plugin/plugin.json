@@ -1,0 +1,13 @@
+{
+  "name": "sandboxed-app-helper",
+  "displayName": "Sandboxed App Helper",
+  "version": "1.0.0",
+  "description": "Add an unsandboxed, Developer ID-signed XPC helper to a sandboxed macOS app, with the shared contract package, launch agent, xcconfig tree, download/install flow, and release pipeline.",
+  "author": {
+    "name": "Delightful Apps",
+    "url": "https://github.com/delightfulapps"
+  },
+  "repository": "https://github.com/delightfulapps/sharedapphelper-plugin",
+  "license": "MIT",
+  "keywords": ["macos", "xpc", "app-sandbox", "launch-agent", "smappservice", "notarization", "xcconfig", "developer-id"]
+}

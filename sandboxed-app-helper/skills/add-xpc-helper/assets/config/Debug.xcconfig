@@ -1,0 +1,15 @@
+// Debug.xcconfig
+// Attached to the *project's* Debug build configuration.
+
+#include "Base.xcconfig"
+
+DEBUG_INFORMATION_FORMAT = dwarf
+ENABLE_TESTABILITY = YES
+GCC_OPTIMIZATION_LEVEL = 0
+GCC_PREPROCESSOR_DEFINITIONS = DEBUG=1 $(inherited)
+ONLY_ACTIVE_ARCH = YES
+SWIFT_ACTIVE_COMPILATION_CONDITIONS = DEBUG $(inherited)
+SWIFT_OPTIMIZATION_LEVEL = -Onone
+
+// Point this at a staging host, or leave it equal to the production value if there isn't one.
+HELPER_DISTRIBUTION_HOST = {{DISTRIBUTION_HOST}}

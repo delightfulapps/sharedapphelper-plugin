@@ -1,0 +1,5 @@
+<!-- Add to the app target's Info.plist. Xcode expands build-setting references at build time, which
+     is how a value that differs between Debug and Release reaches runtime as a plain string.
+     See references/xcconfig.md for the full xcconfig -> Info.plist -> service wiring. -->
+<key>HelperDistributionHost</key>
+<string>$(HELPER_DISTRIBUTION_HOST)</string>

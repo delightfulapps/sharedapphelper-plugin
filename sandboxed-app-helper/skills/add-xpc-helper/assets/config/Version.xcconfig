@@ -1,0 +1,11 @@
+// Version.xcconfig
+// The single source of truth for version numbers. #included by every target xcconfig so the app and
+// the helper always ship the same version. Bump here and nowhere else.
+//
+// They have to move together: the app compares its own version against the installed helper's to
+// decide whether an update is due, and CI derives the release tag and the helper manifest from the
+// built product's CFBundleShortVersionString. A per-target MARKETING_VERSION would silently override
+// this include for that one product.
+
+MARKETING_VERSION = 1.0
+CURRENT_PROJECT_VERSION = 1

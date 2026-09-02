@@ -1,0 +1,30 @@
+// {{HELPER_NAME}}.xcconfig
+// Settings for the standalone, unsandboxed Developer ID helper target.
+//
+// Intentionally carries no CODE_SIGN_IDENTITY and no CODE_SIGN_ENTITLEMENTS: the helper is signed for
+// Developer ID distribution outside Xcode's automatic flow (see references/signing-and-ci.md). Adding
+// an App Store signing identity here is the quickest way to produce a helper that cannot be
+// notarized.
+
+#include "Version.xcconfig"
+
+ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon
+CODE_SIGN_STYLE = Automatic
+COMBINE_HIDPI_IMAGES = YES
+DEVELOPMENT_TEAM = {{TEAM_ID}}
+
+// The two settings the whole architecture rests on: the helper exists to run *outside* the sandbox,
+// and notarization requires the Hardened Runtime.
+ENABLE_APP_SANDBOX = NO
+ENABLE_HARDENED_RUNTIME = YES
+
+GENERATE_INFOPLIST_FILE = YES
+// Menubar (agent) app: a status-bar item only — no dock icon, no app menu, no main window.
+INFOPLIST_KEY_LSUIElement = YES
+INFOPLIST_KEY_CFBundleDisplayName = {{HELPER_NAME}}
+LD_RUNPATH_SEARCH_PATHS = $(inherited) @executable_path/../Frameworks
+MACOSX_DEPLOYMENT_TARGET = {{DEPLOYMENT_TARGET}}
+PRODUCT_BUNDLE_IDENTIFIER = {{HELPER_BUNDLE_ID}}
+PRODUCT_NAME = $(TARGET_NAME)
+SDKROOT = macosx
+SWIFT_VERSION = 6.0

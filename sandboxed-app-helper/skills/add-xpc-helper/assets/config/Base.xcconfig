@@ -1,0 +1,27 @@
+// Base.xcconfig
+// Project-wide settings identical in Debug and Release. Included by Debug.xcconfig and
+// Release.xcconfig — never by a target xcconfig, or $(inherited) lists would accumulate duplicates.
+
+ALWAYS_SEARCH_USER_PATHS = NO
+CLANG_ENABLE_MODULES = YES
+CLANG_ENABLE_OBJC_ARC = YES
+CLANG_WARN_DOCUMENTATION_COMMENTS = YES
+CLANG_WARN_UNGUARDED_AVAILABILITY = YES_AGGRESSIVE
+COPY_PHASE_STRIP = NO
+DEAD_CODE_STRIPPING = YES
+ENABLE_STRICT_OBJC_MSGSEND = YES
+ENABLE_USER_SCRIPT_SANDBOXING = YES
+GCC_NO_COMMON_BLOCKS = YES
+GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR
+GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE
+GCC_WARN_UNUSED_FUNCTION = YES
+GCC_WARN_UNUSED_VARIABLE = YES
+MACOSX_DEPLOYMENT_TARGET = {{DEPLOYMENT_TARGET}}
+
+// The host serving the helper's release manifest and archives.
+//
+// Scheme-less on purpose: `//` starts a comment in an xcconfig, so a full URL would be silently
+// truncated. The app prepends https://. This is the production default; Debug.xcconfig overrides it
+// so development builds can point at a staging host. It reaches runtime through the app target's
+// Info.plist key HelperDistributionHost.
+HELPER_DISTRIBUTION_HOST = {{DISTRIBUTION_HOST}}
