@@ -106,8 +106,20 @@ drop, so callers just send:
 let version = try await client.send(.helperInfo).helperVersion()
 ```
 
+Call `connect()` once at launch anyway. An XPC Mach connection is lazy — creating and resuming one
+reaches nothing, and the helper's listener is handed no peer until a message actually travels — so
+`connect()` sends a `ping` to make the connection real. Without it the helper's menubar sits on
+"Idle" while the app believes it is connected, and a missing helper isn't discovered until the first
+request the user is waiting on.
+
 Subscribe to `connectionLostEvents()` where the UI needs to react — the helper quitting or being
-updated mid-session shows up there and nowhere else.
+updated mid-session shows up there and nowhere else. If that stream drives a reconnect loop, back the
+retry off to a ceiling rather than using one fixed delay: on a machine with no helper installed, and
+none ever coming, a fixed delay retries at that rate for the life of the process.
+
+When the helper needs to originate requests *to* the app rather than only answer them, read
+[callbacks.md](callbacks.md) — that direction is not in the templates, and the shortcut of inferring
+which peer is the app breaks against `installedHelperVersion()`'s throwaway probe connection.
 
 If the project uses a dependency-injection container, register the client and
 ``HelperInstallationService`` in it; the package deliberately takes no opinion, which is why
