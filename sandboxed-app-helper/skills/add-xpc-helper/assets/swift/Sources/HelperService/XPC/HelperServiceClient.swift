@@ -42,6 +42,20 @@ public actor HelperServiceClient {
     try await send(.ping).ok()
   }
 
+  /// Opens the connection now rather than on first ``send(_:)``.
+  ///
+  /// Creating and resuming an XPC Mach connection isn't enough to open one: the connection is lazy,
+  /// and the helper's listener is handed no peer until a message travels. This sends that message,
+  /// so the helper's connected-peer indicator is right and a missing helper is reported at launch
+  /// rather than on the first real request the user is waiting on.
+  ///
+  /// A project that adds a helper-to-app callback direction replaces the ping here with its own
+  /// announcement, so the helper learns *which* peer is the app instead of guessing — see
+  /// `references/callbacks.md`.
+  public func connect() async throws {
+    try await ping()
+  }
+
   /// Disconnects, cancelling the transport and clearing cached state.
   public func disconnect() async {
     await discardConnection(reason: "Client disconnected")

@@ -132,6 +132,11 @@ Each of these was a real, expensive bug. Keep them even when the code around the
   makes a newer release look older and updates stop being detected.
 - **The app cannot register the agent.** A sandboxed process gets `Operation not permitted`. The
   helper registers itself.
+- **Opening a connection takes a message.** Creating and resuming an XPC Mach connection reaches
+  nothing — the helper's listener is handed no peer until something is actually sent, so a `connect`
+  that only builds the transport establishes nothing and reports success. `connect()` sends a `ping`
+  for exactly this reason. A helper that must call back into the app needs the app to *announce*
+  itself rather than the helper guessing which of its peers is the app.
 
 ## Verification checklist
 
@@ -165,6 +170,7 @@ helper's menubar item shows a connected peer. `installedHelperVersion()` returni
 | `references/launch-agent.md` | Step 4, or a registration that will not stick |
 | `references/distribution.md` | Step 6 — manifest schema, hosting, install UI |
 | `references/signing-and-ci.md` | Step 7 — Developer ID, notarization, Xcode Cloud |
+| `references/callbacks.md` | The helper needs to send requests *to* the app, not just answer them |
 | `references/troubleshooting.md` | Anything is broken |
 | `references/previewsmith-example.md` | Wanting a worked example of a real, non-trivial contract |
 
